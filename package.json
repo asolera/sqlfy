@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "sqlfy": "bin/sqlfy-global"
+    "sqlfy": "./bin/sqlfy-global.js"
   },
   "preferGlobal": true,
   "keywords": [
