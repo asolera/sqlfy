@@ -1,6 +1,6 @@
 {
   "name": "sqlfy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple SQL template engine framework",
   "author": "Andrew Solera <andrewsolera@gmail.com>",
   "repository": "asolera/sqlfy",
