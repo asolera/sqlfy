@@ -112,4 +112,4 @@ CREATE TABLE hello_method (
 
 ## Author
 
-- Andrew Solera <andrewsolera@gmail.com> (https://github.com/asolera/)
+- [Andrew Solera](https://github.com/asolera/) (andrewsolera@gmail.com)
