@@ -1,0 +1,33 @@
+{
+  "name": "sqlfy",
+  "version": "1.0.0",
+  "description": "A simple SQL template engine framework",
+  "author": "Andrew Solera <andrewsolera@gmail.com>",
+  "repository": "asolera/sqlfy",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "sqlfy": "bin/sqlfy-global"
+  },
+  "preferGlobal": true,
+  "keywords": [
+    "cli",
+    "convert",
+    "converter",
+    "engine",
+    "framework",
+    "javascript",
+    "parse",
+    "parser",
+    "sql",
+    "template"
+  ],
+  "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^4.1.1",
+    "fs-extra": "^8.1.0"
+  }
+}
