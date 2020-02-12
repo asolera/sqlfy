@@ -1,10 +1,12 @@
-# sqlfy
+# SQLfy
 
-A simple template engine for SQL files.
+A simple template engine for generating dynamic SQL files.
 
 SQLfy basically reads a source folder containing SQL template files and convert to plain SQL files.
 
-It allows you to use global variables and functions.
+It allows you to use custom global variables, functions and custom SQL methods.
+
+This was originally created to simplify the generation of plain SQL files used in ETL projects. Sometimes you need to rename a table and, instead of replace it manually in every file, you can just update a global variable.
 
 ## Installation / Configuration
 
@@ -26,11 +28,9 @@ The following properties are required:
 
 ## Basic Usage
 
-### Conversion
+Run the command `sqlfy` at the root of your project (the same folder as `sqlfy.js`) and it will automatically convert all template files defined in config file.
 
-Run the command `sqlfy` at the root of your project (the same folder as `sqlfy.js`).
-
-### Variables
+## Variables
 
 Global variables must be set inside "vars" properties of `sqlfy.js`.
 
@@ -46,9 +46,7 @@ module.exports = {
     vars: {
         sample: 'hello_variable'
     },
-    methods: {
-        sample: () => 'hello_method'
-    }
+    methods: {}
 };
 ```
 
@@ -70,7 +68,7 @@ CREATE TABLE hello_variable (
 );
 ```
 
-### Methods
+## Methods
 
 You can also create methods inside `sqlfy.js` that returns a string to substitute the template.
 
@@ -83,9 +81,7 @@ module.exports = {
     sourceDir: './src',
     destDir: './dist',
     templateExtension: '.sql',
-    vars: {
-        sample: 'hello_variable'
-    },
+    vars: {},
     methods: {
         sample: () => 'hello_method'
     }
@@ -108,6 +104,46 @@ CREATE TABLE hello_method (
     id SERIAL NOT NULL, 
     desc VARCHAR(50) NOT NULL 
 );
+```
+
+## SQL Methods
+
+There are some native SQL methods that you can use to simplify some commands. All these methods must be called preceding by "sql.".
+
+Available methods:
+- dropTable(_tableName_) => `DROP TABLE tableName`
+- dropView(_viewName_) => `DROP VIEW viewName`
+- dropProcedure(_procedureName_) => `DROP PROCEDURE procedureName`
+- truncate(_tableName_) => `TRUNCATE TABLE tableName`
+
+You can pass in plain strings, variables or methods defined in config file.
+
+Example:
+
+Template:
+
+```sql
+-- Example using static string
+${sql.dropTable('example_table')}
+
+-- Example using variable
+${sql.dropTable(_.sample_)}
+
+-- Example using method
+${sql.dropTable($.sample())}
+```
+
+Will be converted to:
+
+```sql
+-- Example using static string
+DROP TABLE `example_table`;
+
+-- Example using variable
+DROP TABLE `undefined`;
+
+-- Example using method
+DROP TABLE `hello_method`;
 ```
 
 ## Author
