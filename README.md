@@ -118,6 +118,8 @@ Available methods:
 
 You can pass in plain strings, variables or methods defined in config file.
 
+You can algo pass an array instead of table name. In that case, SQLfy will generate a list of statements for each item in array.
+
 Example:
 
 Template:
@@ -127,23 +129,31 @@ Template:
 ${sql.dropTable('example_table')}
 
 -- Example using variable
-${sql.dropTable(_.sample_)}
+${sql.dropTable(_.sample)}
 
 -- Example using method
 ${sql.dropTable($.sample())}
+
+-- Example using array
+${sql.dropTable(['table_a', 'table_b', 'table_c'])}
 ```
 
 Will be converted to:
 
 ```sql
 -- Example using static string
-DROP TABLE `example_table`;
+DROP TABLE example_table;
 
 -- Example using variable
-DROP TABLE `undefined`;
+DROP TABLE hello_variable;
 
 -- Example using method
-DROP TABLE `hello_method`;
+DROP TABLE hello_method;
+
+-- Example using array
+DROP TABLE table_a;
+DROP TABLE table_b;
+DROP TABLE table_c;
 ```
 
 ## Author
